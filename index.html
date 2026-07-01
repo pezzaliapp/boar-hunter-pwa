@@ -27,6 +27,10 @@
       <div class="health"><div id="healthFill" class="health-fill"></div></div>
       <div id="ammo" class="ammo">▮▮▮▮▮▮</div>
     </div>
+    <div class="hud-center">
+      <div id="timer" class="timer">0:00</div>
+      <div id="score" class="score">00000</div>
+    </div>
     <div class="hud-right">
       <div id="counter" class="counter">🐗 0 / 3</div>
     </div>
@@ -68,7 +72,8 @@
     <div class="panel">
       <h1 class="title lose">GAME OVER</h1>
       <p class="subtitle">Un cinghiale ha avuto la meglio…</p>
-      <button id="restartBtn" class="btn-primary">↻ Riprova</button>
+      <div class="stats" id="goStats"></div>
+      <button id="restartBtn" class="btn-primary">↻ Rigioca</button>
       <button class="btn-ghost" data-menu>Menu</button>
     </div>
   </div>
@@ -78,6 +83,7 @@
     <div class="panel">
       <h1 class="title win">LIVELLO COMPLETATO!</h1>
       <p class="subtitle">Hai caricato tutti i cinghiali sulla jeep 🛻</p>
+      <div class="stats" id="lcStats"></div>
       <button id="replayBtn" class="btn-primary">↻ Rigioca</button>
       <button class="btn-ghost" data-menu>Menu</button>
     </div>

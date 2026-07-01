@@ -12,7 +12,7 @@ window.BH = window.BH || {};
   const TILE_H = 32;
 
   BH.config = {
-    version: '0.1.0',
+    version: '0.2.0',
     TILE_W: TILE_W,
     TILE_H: TILE_H,
     HW: TILE_W / 2,
@@ -46,6 +46,9 @@ window.BH = window.BH || {};
     },
 
     goal: 3,
+    // "par" time in seconds used for the completion time bonus
+    // (+10 points per second left under this limit). The HUD timer counts up.
+    timeLimit: 90,
 
     colors: {
       uiDark: 'rgba(16,24,18,0.72)',

@@ -4,6 +4,23 @@ Tutte le modifiche rilevanti a questo progetto sono documentate in questo file.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e il
 progetto adotta il [Semantic Versioning](https://semver.org/lang/it/).
 
+## [0.2.0] — 2026-07-01
+### Punteggio, timer e schermata risultato
+#### Aggiunto
+- **HUD esteso**: timer di partita e punteggio, oltre a vita, munizioni e
+  contatore cinghiali/obiettivo.
+- **Timer** che parte alla pressione di *Gioca* e conta il tempo di gioco.
+- **Sistema di punteggio**: +100 per cinghiale abbattuto, +250 per cinghiale
+  caricato sulla jeep, +500 bonus di completamento livello e **bonus tempo**
+  (+10 punti per ogni secondo rimasto sotto il tempo limite, `config.timeLimit`).
+- **Schermata "Risultato"** sia per *Livello completato* sia per *Game Over*,
+  con: punteggio finale, tempo impiegato, cinghiali abbattuti, cinghiali
+  caricati, **precisione tiro %** e pulsante *Rigioca*.
+- Tracciamento colpi sparati/andati a segno per calcolare la precisione.
+#### Modificato
+- Bump `CACHE_VERSION` del service worker a `boar-hunter-v0.2.0` per aggiornare
+  la cache offline.
+
 ## [0.1.0] — 2026-07-01
 ### Prototipo giocabile iniziale (PWA)
 #### Aggiunto

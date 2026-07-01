@@ -79,6 +79,30 @@ html, body {
   padding: 8px 12px;
   border-radius: 10px;
 }
+.hud-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: var(--ui-dark);
+  padding: 6px 16px;
+  border-radius: 12px;
+}
+.timer {
+  font-size: 22px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: #eef3ea;
+}
+.score {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+  color: #ffd98a;
+}
+.score::before { content: "★ "; color: var(--accent); }
 
 /* ---------------- Touch controls ---------------- */
 .touch {
@@ -264,6 +288,29 @@ html, body {
   border-radius: 12px;
   cursor: pointer;
 }
+/* ---- result stats block ---- */
+.stats {
+  margin: 6px auto 22px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 12px;
+  padding: 8px 14px;
+}
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 7px 2px;
+  font-size: 15px;
+  color: #c6d2c2;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-row b { color: #eef3ea; font-variant-numeric: tabular-nums; }
+.stat-row.big { font-size: 17px; }
+.stat-row.big b { color: var(--accent); font-size: 24px; font-weight: 900; }
+
 .hint {
   margin: 22px auto 8px;
   font-size: 13px;

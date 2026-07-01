@@ -61,6 +61,16 @@ Da smartphone, apri l'URL e usa *"Aggiungi a schermata Home"* per installarla.
 Il fucile è orientato nella direzione di mira/movimento; i proiettili sono
 visibili come traccianti.
 
+## 🏆 Punteggio e timer (v0.2)
+
+- HUD con **timer** (parte a *Gioca*) e **punteggio** oltre a vita, munizioni e
+  contatore cinghiali/obiettivo.
+- Punti: **+100** cinghiale abbattuto · **+250** cinghiale caricato · **+500**
+  completamento livello · **+10** per ogni secondo rimasto sotto il tempo limite
+  (`config.timeLimit`, default 90s).
+- Schermata **Risultato** (sia vittoria sia Game Over) con punteggio finale,
+  tempo impiegato, cinghiali abbattuti/caricati, **precisione tiro %** e *Rigioca*.
+
 ---
 
 ## 📦 Cosa contiene la v0.1
@@ -127,9 +137,10 @@ CHANGELOG.md
 
 ## 🛣️ Roadmap
 
-### v0.2
-- Più livelli e difficoltà crescente (numero/velocità cinghiali).
-- Timer e punteggio, con salvataggio best score in `localStorage`.
+### v0.2 — ✅ punteggio, timer e schermata risultato (fatto)
+- ✅ HUD con timer e punteggio; schermata Risultato con statistiche e precisione.
+- Prossimi passi: salvataggio best score in `localStorage`, più livelli e
+  difficoltà crescente (numero/velocità cinghiali).
 - Barra di "trascinamento" del cinghiale fino alla jeep (invece del pickup istantaneo).
 - Effetti particellari (polvere, sangue cartoon, foglie) e mini-mappa.
 - Migliore feedback audio e musica di sottofondo in loop.

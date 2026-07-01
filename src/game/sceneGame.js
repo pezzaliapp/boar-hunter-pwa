@@ -115,6 +115,15 @@ window.BH = window.BH || {};
       this.loaded = 0;
       this.state = 'play';
       this.promptBoar = null;
+
+      // run stats / scoring
+      this.score = 0;
+      this.elapsed = 0;         // seconds since "Gioca"
+      this.kills = 0;
+      this.shotsFired = 0;
+      this.shotsHit = 0;
+      this.timeBonus = 0;
+
       this._syncCam(true);
       this._syncHud();
     },
@@ -140,11 +149,30 @@ window.BH = window.BH || {};
       BH.ui.setHealth(this.player.health);
       BH.ui.setAmmo(this.player.ammo, cfg.player.magazine, this.player.reloading);
       BH.ui.setCounter(this.loaded, cfg.goal);
+      BH.ui.setScore(this.score);
+      BH.ui.setTimer(this.elapsed, cfg.timeLimit);
+    },
+
+    // Build the result payload and show the matching final screen.
+    _finish: function (kind) {
+      const acc = this.shotsFired > 0
+        ? Math.round(this.shotsHit / this.shotsFired * 100) : 0;
+      BH.ui.showResult(kind, {
+        score: this.score,
+        time: this.elapsed,
+        kills: this.kills,
+        loaded: this.loaded,
+        goal: cfg.goal,
+        accuracy: acc,
+        timeBonus: this.timeBonus,
+      });
     },
 
     update: function (dt) {
       BH.ui.tick(dt);
       if (this.state !== 'play') { this._syncCam(false); return; }
+
+      this.elapsed += dt;
 
       const input = BH.controls.sample();
       const p = this.player;
@@ -154,7 +182,7 @@ window.BH = window.BH || {};
       // shooting (auto-repeat while held; cooldown gated inside shoot())
       if (input.shoot) {
         const b = p.shoot();
-        if (b) this.bullets.push(b);
+        if (b) { this.bullets.push(b); this.shotsFired++; }
       }
       if (input.reloadEdge) p.reload();
 
@@ -169,8 +197,13 @@ window.BH = window.BH || {};
           if (bo.dead) continue;
           if (U.dist(b.tx, b.ty, bo.tx, bo.ty) < bo.radius + b.radius) {
             b.dead = true;
+            this.shotsHit++;
             const killed = bo.hit();
-            if (killed) BH.ui.toast('Cinghiale abbattuto!');
+            if (killed) {
+              this.kills++;
+              this.score += 100;
+              BH.ui.toast('Cinghiale abbattuto! +100');
+            }
             break;
           }
         }
@@ -199,8 +232,11 @@ window.BH = window.BH || {};
       if (!p.alive) {
         this.state = 'gameover';
         BH.ui.hidePrompt();
-        BH.ui.showGameOver(true);
+        this._finish('lose');
         BH.audio && BH.audio.play('gameover');
+        this._syncCam(false);
+        this._syncHud();
+        return;
       }
 
       // pickup prompt: nearest downed, un-loaded boar in range
@@ -217,9 +253,10 @@ window.BH = window.BH || {};
         if (input.actionEdge) {
           this.promptBoar.loaded = true;
           this.loaded++;
+          this.score += 250;
           this.jeep.loaded = Math.min(this.loaded, cfg.goal + 2);
           BH.ui.hidePrompt();
-          BH.ui.toast('Caricato! ' + this.loaded + '/' + cfg.goal);
+          BH.ui.toast('Caricato! +250  (' + this.loaded + '/' + cfg.goal + ')');
           BH.audio && BH.audio.play('load');
           this.promptBoar = null;
         }
@@ -230,9 +267,15 @@ window.BH = window.BH || {};
       // win
       if (this.loaded >= cfg.goal) {
         this.state = 'complete';
+        // completion bonus + time bonus (+10 per second left under the time limit)
+        this.timeBonus = Math.max(0, Math.floor(cfg.timeLimit - this.elapsed)) * 10;
+        this.score += 500 + this.timeBonus;
         BH.ui.hidePrompt();
-        BH.ui.showLevelComplete(true);
+        this._finish('win');
         BH.audio && BH.audio.play('win');
+        this._syncCam(false);
+        this._syncHud();
+        return;
       }
 
       this._syncCam(false);

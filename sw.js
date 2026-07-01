@@ -4,7 +4,7 @@
  * with a network fallback that also caches any newly fetched same-origin GETs.
  * Bump CACHE_VERSION whenever shipped files change to invalidate old caches.
  */
-const CACHE_VERSION = 'boar-hunter-v0.1.0';
+const CACHE_VERSION = 'boar-hunter-v0.2.0';
 
 // Paths are relative so the SW works from the repo root AND from a GitHub
 // Pages subpath (e.g. /boar-hunter-pwa/).

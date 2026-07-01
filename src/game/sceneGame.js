@@ -157,6 +157,7 @@ window.BH = window.BH || {};
     _finish: function (kind) {
       const acc = this.shotsFired > 0
         ? Math.round(this.shotsHit / this.shotsFired * 100) : 0;
+      const isRecord = BH.storage.saveBest(this.score);
       BH.ui.showResult(kind, {
         score: this.score,
         time: this.elapsed,
@@ -165,6 +166,8 @@ window.BH = window.BH || {};
         goal: cfg.goal,
         accuracy: acc,
         timeBonus: this.timeBonus,
+        best: BH.storage.getBest(),
+        isRecord: isRecord,
       });
     },
 

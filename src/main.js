@@ -117,6 +117,7 @@ window.BH = window.BH || {};
     timer: $('timer'),
     touch: $('touch'),
     menu: $('menu'),
+    menuBest: $('menuBest'),
     gameover: $('gameover'),
     levelcomplete: $('levelcomplete'),
     goStats: $('goStats'),

@@ -310,6 +310,29 @@ html, body {
 .stat-row b { color: #eef3ea; font-variant-numeric: tabular-nums; }
 .stat-row.big { font-size: 17px; }
 .stat-row.big b { color: var(--accent); font-size: 24px; font-weight: 900; }
+.record-badge {
+  margin: 0 auto 12px;
+  padding: 8px 14px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #12241a;
+  background: linear-gradient(180deg, #ffd76a, #e8a72b);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  animation: pop 0.4s ease;
+}
+@keyframes pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.best {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffd98a;
+  font-variant-numeric: tabular-nums;
+}
 
 .hint {
   margin: 22px auto 8px;

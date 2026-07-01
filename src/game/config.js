@@ -12,7 +12,7 @@ window.BH = window.BH || {};
   const TILE_H = 32;
 
   BH.config = {
-    version: '0.2.0',
+    version: '0.2.1',
     TILE_W: TILE_W,
     TILE_H: TILE_H,
     HW: TILE_W / 2,
@@ -52,6 +52,30 @@ window.BH = window.BH || {};
 
     colors: {
       uiDark: 'rgba(16,24,18,0.72)',
+    },
+  };
+
+  // ---- Persistent storage (best score) ----------------------------------
+  // Wrapped in try/catch so it degrades gracefully where localStorage is
+  // unavailable (private mode, file:// on some browsers, quota errors).
+  BH.storage = {
+    KEY: 'boarhunter.bestScore',
+    getBest: function () {
+      try {
+        const v = window.localStorage.getItem(this.KEY);
+        const n = parseInt(v, 10);
+        return isNaN(n) ? 0 : n;
+      } catch (e) { return 0; }
+    },
+    // Save only when it's a new record; returns true if a record was set.
+    saveBest: function (score) {
+      try {
+        if (score > this.getBest()) {
+          window.localStorage.setItem(this.KEY, String(score));
+          return true;
+        }
+      } catch (e) { /* ignore */ }
+      return false;
     },
   };
 

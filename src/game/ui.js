@@ -64,6 +64,13 @@ window.BH = window.BH || {};
       }
     },
 
+    // ---- menu best score ----
+    setMenuBest: function (best) {
+      el.menuBest.textContent = best > 0
+        ? '🏆 Record: ' + String(best).padStart(5, '0')
+        : '';
+    },
+
     // ---- overlays ----
     showHud: function (show) { el.hud.style.display = show ? 'flex' : 'none'; },
     showTouch: function (show) { el.touch.style.display = show ? 'block' : 'none'; },
@@ -84,8 +91,10 @@ window.BH = window.BH || {};
         ['Precisione tiro', data.accuracy + '%'],
       ];
       if (win && data.timeBonus > 0) rows.push(['Bonus tempo', '+' + data.timeBonus]);
+      rows.push(['🏆 Record', String(data.best || 0).padStart(5, '0')]);
 
       let html = '';
+      if (data.isRecord) html += '<div class="record-badge">🏆 NUOVO RECORD!</div>';
       for (let i = 0; i < rows.length; i++) {
         const cls = rows[i][2] ? ' stat-row big' : ' stat-row';
         html += '<div class="' + cls + '"><span>' + rows[i][0] +

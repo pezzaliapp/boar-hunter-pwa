@@ -13,6 +13,7 @@ window.BH = window.BH || {};
     t: 0,
     enter: function () {
       this.t = 0;
+      BH.ui.setMenuBest(BH.storage.getBest());
       BH.ui.showMenu(true);
       BH.ui.showHud(false);
       BH.ui.showTouch(false);

@@ -4,6 +4,17 @@ Tutte le modifiche rilevanti a questo progetto sono documentate in questo file.
 Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.1.0/) e il
 progetto adotta il [Semantic Versioning](https://semver.org/lang/it/).
 
+## [0.2.1] — 2026-07-01
+### Best score persistente
+#### Aggiunto
+- Salvataggio del **miglior punteggio** in `localStorage` (`boarhunter.bestScore`),
+  con wrapper sicuro (try/catch) per ambienti senza storage.
+- Riga **🏆 Record** nella schermata Risultato e badge **"NUOVO RECORD!"** quando
+  il punteggio supera il precedente migliore.
+- Record mostrato anche nel **menu** iniziale.
+#### Modificato
+- Bump `CACHE_VERSION` del service worker a `boar-hunter-v0.2.1`.
+
 ## [0.2.0] — 2026-07-01
 ### Punteggio, timer e schermata risultato
 #### Aggiunto

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#1c4a2c" />
+  <meta name="description" content="Boar Hunter — PWA di caccia isometrica 2D, giocabile offline." />
+
+  <title>Boar Hunter</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" class="hud">
+    <div class="hud-left">
+      <div class="health"><div id="healthFill" class="health-fill"></div></div>
+      <div id="ammo" class="ammo">▮▮▮▮▮▮</div>
+    </div>
+    <div class="hud-right">
+      <div id="counter" class="counter">🐗 0 / 3</div>
+    </div>
+  </div>
+
+  <!-- Touch controls -->
+  <div id="touch" class="touch">
+    <div id="stickZone" class="stick-zone">
+      <div id="stickBase" class="stick-base"><div id="stickKnob" class="stick-knob"></div></div>
+    </div>
+    <div class="touch-buttons">
+      <button id="reloadBtn" class="btn-round btn-reload" aria-label="Ricarica">⟳</button>
+      <button id="shootBtn" class="btn-round btn-shoot" aria-label="Spara">🎯</button>
+    </div>
+  </div>
+
+  <!-- Contextual action button (also used as tap target on mobile) -->
+  <button id="actionBtn" class="action-btn">Carica sulla jeep 🛻</button>
+
+  <!-- Transient toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Menu overlay -->
+  <div id="menu" class="overlay">
+    <div class="panel">
+      <h1 class="title">BOAR<span>HUNTER</span></h1>
+      <p class="subtitle">Caccia isometrica nella foresta</p>
+      <button id="playBtn" class="btn-primary">▶ Gioca</button>
+      <div class="hint">
+        <strong>Desktop:</strong> WASD / frecce per muoverti · Spazio per sparare · R ricarica · E carica<br />
+        <strong>Mobile:</strong> joystick a sinistra · 🎯 per sparare · ⟳ ricarica
+      </div>
+      <p class="goaltext">Obiettivo: abbatti i cinghiali e caricane <b>3</b> sulla jeep.</p>
+    </div>
+  </div>
+
+  <!-- Game Over overlay -->
+  <div id="gameover" class="overlay">
+    <div class="panel">
+      <h1 class="title lose">GAME OVER</h1>
+      <p class="subtitle">Un cinghiale ha avuto la meglio…</p>
+      <button id="restartBtn" class="btn-primary">↻ Riprova</button>
+      <button class="btn-ghost" data-menu>Menu</button>
+    </div>
+  </div>
+
+  <!-- Level Complete overlay -->
+  <div id="levelcomplete" class="overlay">
+    <div class="panel">
+      <h1 class="title win">LIVELLO COMPLETATO!</h1>
+      <p class="subtitle">Hai caricato tutti i cinghiali sulla jeep 🛻</p>
+      <button id="replayBtn" class="btn-primary">↻ Rigioca</button>
+      <button class="btn-ghost" data-menu>Menu</button>
+    </div>
+  </div>
+
+  <!-- Game modules (plain scripts + global BH namespace: works from file:// too) -->
+  <script src="src/game/config.js"></script>
+  <script src="src/game/world.js"></script>
+  <script src="src/game/player.js"></script>
+  <script src="src/game/boar.js"></script>
+  <script src="src/game/jeep.js"></script>
+  <script src="src/game/ui.js"></script>
+  <script src="src/game/controls.js"></script>
+  <script src="src/game/sceneBoot.js"></script>
+  <script src="src/game/sceneMenu.js"></script>
+  <script src="src/game/sceneGame.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>
